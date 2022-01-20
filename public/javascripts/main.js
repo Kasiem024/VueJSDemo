@@ -110,5 +110,13 @@ window.onload = () => {
 
     Vue.createApp(funcTest).mount('#divTest');
 
-    const testApp = Vue.createApp({})
+    const TwoWayBindingCars = {
+        data() {
+            return {
+                car: 'Hello Cars!'
+            }
+        }
+    }
+
+    Vue.createApp(TwoWayBindingCars).mount('body');
 }
