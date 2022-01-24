@@ -1,122 +1,212 @@
 'use strict';
 
+let arrAllCars = [],
+    arrUniqueCars = [],
+    arrBases = [];
+
 console.log('main.js is alive');
 
 window.onload = () => {
 
-    const Counter = {
-        data() {
-            return {
-                counter: new Date().toLocaleString()
-            }
-        }
-    }
-
-    Vue.createApp(Counter).mount('#counter');
-
-    const AttributeBinding = {
-        data() {
-            return {
-                message: 'You loaded this page on ' + new Date().toLocaleString()
-            }
-        }
-    }
-
-    Vue.createApp(AttributeBinding).mount('#bind-attribute');
-
-    const EventHandling = {
-        data() {
-            return {
-                message: 'Hello Vue.js!'
-            }
-        },
+    Vue.createApp({
         methods: {
-            reverseMessage() {
-                this.message = this.message
-                    .split('')
-                    .reverse()
-                    .join('')
-            }
+            eventTest() {
+                console.log('eventTest');
+            },
+            eventTest2() {
+                console.log('eventTest2');
+            },
+            eventTest3() {
+                console.log('eventTest3');
+            },
+            eventTest4() {
+                console.log('eventTest4');
+            },
         }
-    }
+    }).mount('#content');
 
-    Vue.createApp(EventHandling).mount('#event-handling');
+    // const Counter = {
+    //     data() {
+    //         return {
+    //             counter: new Date().toLocaleString()
+    //         }
+    //     }
+    // }
 
-    const TwoWayBinding = {
-        data() {
-            return {
-                message: 'Hello Vue!'
+    // Vue.createApp(Counter).mount('#counter');
+
+    // const AttributeBinding = {
+    //     data() {
+    //         return {
+    //             message: 'You loaded this page on ' + new Date().toLocaleString()
+    //         }
+    //     }
+    // }
+
+    // Vue.createApp(AttributeBinding).mount('#bind-attribute');
+
+    // const EventHandling = {
+    //     data() {
+    //         return {
+    //             message: 'Hello Vue.js!'
+    //         }
+    //     },
+    //     methods: {
+    //         reverseMessage() {
+    //             this.message = this.message
+    //                 .split('')
+    //                 .reverse()
+    //                 .join('')
+    //         }
+    //     }
+    // }
+
+    // Vue.createApp(EventHandling).mount('#event-handling');
+
+    // const TwoWayBinding = {
+    //     data() {
+    //         return {
+    //             message: 'Hello Vue!'
+    //         }
+    //     }
+    // }
+
+    // Vue.createApp(TwoWayBinding).mount('#two-way-binding');
+
+    // const ConditionalRendering = {
+    //     data() {
+    //         return {
+    //             seen: true
+    //         }
+    //     }
+    // }
+
+    // Vue.createApp(ConditionalRendering).mount('#conditional-rendering');
+
+    // const ListRendering = {
+    //     data() {
+    //         return {
+    //             todos: [
+    //                 { text: 'Learn JavaScript' },
+    //                 { text: 'Learn Vue' },
+    //                 { text: 'Build something awesome' }
+    //             ]
+    //         }
+    //     }
+    // }
+
+    // Vue.createApp(ListRendering).mount('#list-rendering');
+
+    // const TodoItem = {
+    //     props: ['todo'],
+    //     template: `<li>{{ todo.text }}</li>`
+    // }
+
+    // const TodoList = {
+    //     data() {
+    //         return {
+    //             groceryList: [
+    //                 { id: 0, text: 'Vegetables' },
+    //                 { id: 1, text: 'Cheese' },
+    //                 { id: 2, text: 'Whatever else humans are supposed to eat' }
+    //             ]
+    //         }
+    //     },
+    //     components: {
+    //         TodoItem
+    //     }
+    // }
+    // const app = Vue.createApp(TodoList);
+
+    // app.mount('#todo-list-app');
+
+
+    // const funcTest = {
+    //     data() {
+    //         return {
+    //             messageTest: 'Testing good'
+    //         }
+    //     }
+    // }
+
+    // Vue.createApp(funcTest).mount('#divTest');
+
+    // const TwoWayBindingCars = {
+    //     data() {
+    //         return {
+    //             car: 'Hello Cars!'
+    //         }
+    //     }
+    // }
+
+    // Vue.createApp(TwoWayBindingCars).mount('body');
+}
+
+const functionBtnClickAddCar = () => {
+
+    const currentValue = document.getElementById('inputCar').value;
+
+    arrAllCars.push(currentValue);
+
+    arrUniqueCars = [];
+
+    let arrTemp = [...new Set(arrAllCars.map(item => item))];
+
+    arrTemp.forEach(element => {
+        arrUniqueCars.push({
+            "make": element,
+            "counter": 0
+        });
+    });
+
+    arrUniqueCars.forEach(element1 => {
+        let counterUnique = 1;
+
+        arrAllCars.forEach(element2 => {
+
+            if (element2 == element1.make) {
+                element1.counter = counterUnique;
+                counterUnique++;
             }
-        }
-    }
+        });
+    });
+}
 
-    Vue.createApp(TwoWayBinding).mount('#two-way-binding');
+const functionBtnClickAddBases = () => {
 
-    const ConditionalRendering = {
-        data() {
-            return {
-                seen: true
-            }
-        }
-    }
+    const currentValue = document.getElementById('inputBases').value;
 
-    Vue.createApp(ConditionalRendering).mount('#conditional-rendering');
+    const tempArr = currentValue.split(' ');
 
-    const ListRendering = {
-        data() {
-            return {
-                todos: [
-                    { text: 'Learn JavaScript' },
-                    { text: 'Learn Vue' },
-                    { text: 'Build something awesome' }
-                ]
-            }
-        }
-    }
+    tempArr.forEach(element => {
 
-    Vue.createApp(ListRendering).mount('#list-rendering');
+        element *= element;
+        arrBases.push(parseInt(element));
+    });
 
-    const TodoItem = {
-        props: ['todo'],
-        template: `<li>{{ todo.text }}</li>`
-    }
+    arrBases.sort((first, second) => first - second);
+}
 
-    const TodoList = {
-        data() {
-            return {
-                groceryList: [
-                    { id: 0, text: 'Vegetables' },
-                    { id: 1, text: 'Cheese' },
-                    { id: 2, text: 'Whatever else humans are supposed to eat' }
-                ]
-            }
-        },
-        components: {
-            TodoItem
-        }
-    }
-    const app = Vue.createApp(TodoList);
+const functionBtnClickCalcBases = () => {
 
-    app.mount('#todo-list-app');
+    document.getElementById('divShowBases').innerHTML = null;
 
+    arrBases.forEach(element => {
 
-    const funcTest = {
-        data() {
-            return {
-                messageTest: 'Testing good'
-            }
-        }
-    }
+        const li = document.createElement('li');
+        li.textContent = `${Math.sqrt(element)} (${element})`;
+        document.getElementById('divShowBases').appendChild(li);
+    });
+}
 
-    Vue.createApp(funcTest).mount('#divTest');
+const funcBtnClickShowCars = () => {
 
-    const TwoWayBindingCars = {
-        data() {
-            return {
-                car: 'Hello Cars!'
-            }
-        }
-    }
+    document.getElementById('divShowCars').innerHTML = null;
 
-    Vue.createApp(TwoWayBindingCars).mount('body');
+    arrUniqueCars.forEach(element => {
+
+        const li = document.createElement('li');
+        li.textContent = `There are ${element.counter} ${element.make}`;
+        document.getElementById('divShowCars').appendChild(li);
+    });
 }
