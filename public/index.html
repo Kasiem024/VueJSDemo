@@ -28,17 +28,16 @@
     <div id="content">
         <div id="divCars">
             <input type="text" id="inputCar">
-            <button id="btnAddCar" onclick="functionBtnClickAddCar()" @click="eventTest">Add Car</button>
-            <button id="btnShowCars" onclick="funcBtnClickShowCars()" @click="eventTest2">Show Cars</button>
+            <button id="btnAddCar" @click="functionBtnClickAddCar">Add Car</button>
+            <button id="btnShowCars" @click="funcBtnClickShowCars">Show Cars</button>
             <div id="divShowCars"></div>
         </div>
         <br>
         <br>
         <div id="divBases">
-            <input type="text " id="inputBases ">
-            <button id="btnAddBases " onclick="functionBtnClickAddBases()" @click="eventTest3">Add Bases</button>
-            <button id="btnCalcBases " onclick="functionBtnClickCalcBases()" @click="eventTest4">Calculate
-                Bases</button>
+            <input type="text " id="inputBases">
+            <button id="btnAddBases" @click="functionBtnClickAddBases">Add Bases</button>
+            <button id="btnCalcBases" @click="functionBtnClickCalcBases">Calculate Bases</button>
             <div id="divShowBases"></div>
         </div>
     </div>

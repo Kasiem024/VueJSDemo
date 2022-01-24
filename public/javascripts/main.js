@@ -10,17 +10,74 @@ window.onload = () => {
 
     Vue.createApp({
         methods: {
-            eventTest() {
-                console.log('eventTest');
+            functionBtnClickAddCar() {
+                console.log('functionBtnClickAddCar');
+
+                const currentValue = document.getElementById('inputCar').value;
+
+                arrAllCars.push(currentValue);
+
+                arrUniqueCars = [];
+
+                let arrTemp = [...new Set(arrAllCars.map(item => item))];
+
+                arrTemp.forEach(element => {
+                    arrUniqueCars.push({
+                        "make": element,
+                        "counter": 0
+                    });
+                });
+
+                arrUniqueCars.forEach(element1 => {
+                    let counterUnique = 1;
+
+                    arrAllCars.forEach(element2 => {
+
+                        if (element2 == element1.make) {
+                            element1.counter = counterUnique;
+                            counterUnique++;
+                        }
+                    });
+                });
             },
-            eventTest2() {
-                console.log('eventTest2');
+            funcBtnClickShowCars() {
+                console.log('funcBtnClickShowCars');
+
+                document.getElementById('divShowCars').innerHTML = null;
+
+                arrUniqueCars.forEach(element => {
+
+                    const li = document.createElement('li');
+                    li.textContent = `There are ${element.counter} ${element.make}`;
+                    document.getElementById('divShowCars').appendChild(li);
+                });
             },
-            eventTest3() {
-                console.log('eventTest3');
+            functionBtnClickAddBases() {
+                console.log('functionBtnClickAddBases');
+
+                const currentValue = document.getElementById('inputBases').value;
+
+                const tempArr = currentValue.split(' ');
+
+                tempArr.forEach(element => {
+
+                    element *= element;
+                    arrBases.push(parseInt(element));
+                });
+
+                arrBases.sort((first, second) => first - second);
             },
-            eventTest4() {
-                console.log('eventTest4');
+            functionBtnClickCalcBases() {
+                console.log('functionBtnClickCalcBases');
+
+                document.getElementById('divShowBases').innerHTML = null;
+
+                arrBases.forEach(element => {
+
+                    const li = document.createElement('li');
+                    li.textContent = `${Math.sqrt(element)} (${element})`;
+                    document.getElementById('divShowBases').appendChild(li);
+                });
             },
         }
     }).mount('#content');
@@ -140,73 +197,4 @@ window.onload = () => {
     // }
 
     // Vue.createApp(TwoWayBindingCars).mount('body');
-}
-
-const functionBtnClickAddCar = () => {
-
-    const currentValue = document.getElementById('inputCar').value;
-
-    arrAllCars.push(currentValue);
-
-    arrUniqueCars = [];
-
-    let arrTemp = [...new Set(arrAllCars.map(item => item))];
-
-    arrTemp.forEach(element => {
-        arrUniqueCars.push({
-            "make": element,
-            "counter": 0
-        });
-    });
-
-    arrUniqueCars.forEach(element1 => {
-        let counterUnique = 1;
-
-        arrAllCars.forEach(element2 => {
-
-            if (element2 == element1.make) {
-                element1.counter = counterUnique;
-                counterUnique++;
-            }
-        });
-    });
-}
-
-const functionBtnClickAddBases = () => {
-
-    const currentValue = document.getElementById('inputBases').value;
-
-    const tempArr = currentValue.split(' ');
-
-    tempArr.forEach(element => {
-
-        element *= element;
-        arrBases.push(parseInt(element));
-    });
-
-    arrBases.sort((first, second) => first - second);
-}
-
-const functionBtnClickCalcBases = () => {
-
-    document.getElementById('divShowBases').innerHTML = null;
-
-    arrBases.forEach(element => {
-
-        const li = document.createElement('li');
-        li.textContent = `${Math.sqrt(element)} (${element})`;
-        document.getElementById('divShowBases').appendChild(li);
-    });
-}
-
-const funcBtnClickShowCars = () => {
-
-    document.getElementById('divShowCars').innerHTML = null;
-
-    arrUniqueCars.forEach(element => {
-
-        const li = document.createElement('li');
-        li.textContent = `There are ${element.counter} ${element.make}`;
-        document.getElementById('divShowCars').appendChild(li);
-    });
 }
