@@ -42,6 +42,12 @@
         </div>
     </div>
 
+    <div id="two-way-binding">
+        <p>{{ message }}</p>
+        <input v-model="message" />
+        <button @click="eventTest">Testing events </button>
+    </div>
+
     <!-- <br>
     <br>
 

@@ -82,6 +82,21 @@ window.onload = () => {
         }
     }).mount('#content');
 
+    const TwoWayBinding = {
+        data() {
+            return {
+                message: 'Hello Vue!'
+            }
+        },
+        methods: {
+            eventTest() {
+                console.log(this)
+            }
+        },
+    }
+
+    Vue.createApp(TwoWayBinding).mount('#two-way-binding')
+
     // const Counter = {
     //     data() {
     //         return {
